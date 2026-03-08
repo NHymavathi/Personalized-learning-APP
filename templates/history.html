@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learning History - Personalized Learning Assistant">
+    <title>📜 Learning History - Personalized Learning Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📜 Learning History</h1>
+            <div class="user-info">
+                <span>👤 {{ session.get('username') }}</span>
+                <a href="/logout" class="btn btn-small">Logout</a>
+            </div>
+        </header>
+
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <nav class="breadcrumb">
+                <a href="/">🏠 Home</a> > <span>Learning History</span>
+            </nav>
+
+            <section class="history-header">
+                <h2>📚 Your Learning Journey</h2>
+                <p class="subtitle">Review the topics you've learned about and access your generated materials.</p>
+                
+                {% if history %}
+                <p class="history-count">Total Topics Learned: <strong>{{ history|length }}</strong></p>
+                {% endif %}
+            </section>
+
+            {% if history %}
+            <section class="history-list">
+                {% for item in history %}
+                <div class="history-item">
+                    <div class="history-topic">
+                        <h3>📖 {{ item.topic }}</h3>
+                        <span class="history-date">🕐 {{ item.created_at }}</span>
+                    </div>
+                    <div class="history-content">
+                        <button class="btn btn-small" onclick="toggleContent('content-{{ loop.index }}')">
+                            👁️ View Content
+                        </button>
+                        <div id="content-{{ loop.index }}" class="history-detail" style="display: none;">
+                            <div class="content-section">
+                                <h4>📚 Explanation</h4>
+                                <p>{{ item.content.explanation|default('No explanation available') }}</p>
+                            </div>
+                            {% if item.content.key_topics %}
+                            <div class="content-section">
+                                <h4>📌 Key Topics</h4>
+                                <ul>
+                                    {% for topic in item.content.key_topics %}
+                                    <li>{{ topic }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                            {% if item.content.practice_tasks %}
+                            <div class="content-section">
+                                <h4>✅ Practice Tasks</h4>
+                                <ul>
+                                    {% for task in item.content.practice_tasks %}
+                                    <li>{{ task }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                            {% if item.content.resources %}
+                            <div class="content-section">
+                                <h4>🌐 Resources</h4>
+                                <ul class="resource-list">
+                                    {% for resource in item.content.resources[:5] %}
+                                    <li>
+                                        <a href="{{ resource.url }}" target="_blank" rel="noopener">
+                                            {{ resource.icon }} {{ resource.title }}
+                                        </a>
+                                        <span class="resource-type">{{ resource.type }}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            {% else %}
+            <section class="empty-state">
+                <div class="empty-icon">📚</div>
+                <h3>No Learning History Yet</h3>
+                <p>Start generating learning materials to build your history!</p>
+                <a href="/" class="btn btn-primary">🚀 Generate Learning Material</a>
+            </section>
+            {% endif %}
+
+            <section class="history-actions">
+                <a href="/" class="btn">🏠 Back to Home</a>
+                {% if history %}
+                <button class="btn" onclick="window.print()">🖨️ Print History</button>
+                {% endif %}
+            </section>
+        </main>
+
+        <footer>
+            <p>📚 Personalized Learning Assistant v2.0</p>
+            <p><a href="/profile">⚙️ Profile Settings</a> | <a href="/history">📜 History</a></p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+    <script>
+        function toggleContent(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+

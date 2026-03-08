@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profile Settings - Personalized Learning Assistant">
+    <title>⚙️ Profile Settings - Personalized Learning Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚙️ Profile Settings</h1>
+            <div class="user-info">
+                <span>👤 {{ session.get('username') }}</span>
+                <a href="/logout" class="btn btn-small">Logout</a>
+            </div>
+        </header>
+
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <nav class="breadcrumb">
+                <a href="/">🏠 Home</a> > <span>Profile Settings</span>
+            </nav>
+
+            <section class="profile-form">
+                <h2>📝 Your Learning Preferences</h2>
+                <p class="subtitle">Customize your learning experience by setting your preferences below.</p>
+                
+                <form method="POST" action="/profile">
+                    <div class="form-group">
+                        <label for="learning_style">🎓 Learning Style</label>
+                        <select id="learning_style" name="learning_style">
+                            <option value="Reading" {% if profile and profile.learning_style == 'Reading' %}selected{% endif %}>📖 Reading/Writing</option>
+                            <option value="Visual" {% if profile and profile.learning_style == 'Visual' %}selected{% endif %}>👁️ Visual</option>
+                            <option value="Auditory" {% if profile and profile.learning_style == 'Auditory' %}selected{% endif %}>🎧 Auditory</option>
+                            <option value="Hands-on" {% if profile and profile.learning_style == 'Hands-on' %}selected{% endif %}>🤲 Hands-on</option>
+                        </select>
+                        <small class="help-text">How do you prefer to learn new concepts?</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="level">📈 Proficiency Level</label>
+                        <select id="level" name="level">
+                            <option value="Beginner" {% if profile and profile.level == 'Beginner' %}selected{% endif %}>🟢 Beginner</option>
+                            <option value="Intermediate" {% if profile and profile.level == 'Intermediate' %}selected{% endif %}>🟡 Intermediate</option>
+                            <option value="Advanced" {% if profile and profile.level == 'Advanced' %}selected{% endif %}>🔴 Advanced</option>
+                        </select>
+                        <small class="help-text">What's your current skill level?</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accuracy">⚡ Accuracy Preference: <span id="accuracyValue">{{ profile.accuracy if profile else 80 }}%</span></label>
+                        <input 
+                            type="range" 
+                            id="accuracy" 
+                            name="accuracy" 
+                            min="0" 
+                            max="100" 
+                            value="{{ profile.accuracy if profile else 80 }}"
+                            oninput="document.getElementById('accuracyValue').textContent = this.value + '%'">
+                        <small class="help-text">Higher values = more detailed, comprehensive content</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests">⭐ Interests</label>
+                        <input 
+                            type="text" 
+                            id="interests" 
+                            name="interests" 
+                            value="{{ profile.interests if profile else '' }}"
+                            placeholder="e.g., AI, Web Development, Data Science, Mobile Apps">
+                        <small class="help-text">Comma-separated list of topics you're interested in</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            💾 Save Settings
+                        </button>
+                        <a href="/" class="btn">Cancel</a>
+                    </div>
+                </form>
+            </section>
+
+            {% if profile %}
+            <section class="profile-info">
+                <h3>📊 Profile Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Created:</span>
+                        <span class="info-value">{{ profile.created_at if profile.created_at else 'New profile - not yet saved' }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Updated:</span>
+                        <span class="info-value">{{ profile.updated_at if profile.updated_at else 'Never' }}</span>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer>
+            <p>📚 Personalized Learning Assistant v2.0</p>
+            <p><a href="/profile">⚙️ Profile Settings</a> | <a href="/history">📜 History</a></p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+

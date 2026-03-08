@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Sign Up - Personalized Learning</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>📝 Create Account</h1>
+                <p>Join us and start your personalized learning journey</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label for="username">👤 Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        pattern="[a-zA-Z0-9_]{3,}"
+                        title="Username must be at least 3 characters (letters, numbers, underscore)"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">🔑 Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Create a password (min 6 characters)"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">🔑 Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirm_password" 
+                        name="confirm_password" 
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required>
+                </div>
+
+                <div class="password-requirements">
+                    <p><strong>Password Requirements:</strong></p>
+                    <ul>
+                        <li id="req-length">✓ At least 6 characters</li>
+                        <li id="req-match">✓ Passwords match</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">
+                    🚀 Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+                <p><a href="/">← Back to Home</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Client-side validation
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const reqLength = document.getElementById('req-length');
+        const reqMatch = document.getElementById('req-match');
+
+        function validatePassword() {
+            // Length check
+            if (password.value.length >= 6) {
+                reqLength.textContent = '✓ At least 6 characters';
+                reqLength.classList.add('valid');
+            } else {
+                reqLength.textContent = '✗ At least 6 characters';
+                reqLength.classList.remove('valid');
+            }
+
+            // Match check
+            if (password.value === confirmPassword.value && password.value.length >= 6) {
+                reqMatch.textContent = '✓ Passwords match';
+                reqMatch.classList.add('valid');
+            } else {
+                reqMatch.textContent = '✗ Passwords match';
+                reqMatch.classList.remove('valid');
+            }
+        }
+
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validatePassword);
+
+        // Form submission validation
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+            }
+        });
+    </script>
+</body>
+</html>
+

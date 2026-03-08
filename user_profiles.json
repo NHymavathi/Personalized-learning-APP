@@ -1,0 +1,210 @@
+{
+  "U218": {
+    "learning_style": "daily",
+    "level": "intermediate",
+    "interests": [
+      "database"
+    ],
+    "accuracy": 80,
+    "history": [
+      {
+        "topic": "data base"
+      },
+      {
+        "topic": "data base"
+      }
+    ]
+  },
+  "9824": {
+    "learning_style": "Reading-Writing",
+    "level": "Advanced",
+    "interests": "rag",
+    "accuracy": 80,
+    "history": [
+      {
+        "topic": "rag"
+      }
+    ]
+  },
+  "9863": {
+    "learning_style": "Visual",
+    "level": "Advanced",
+    "interests": "javascript",
+    "accuracy": 80,
+    "history": [
+      {
+        "topic": "java script"
+      }
+    ]
+  },
+  "7643": {
+    "accuracy": 80,
+    "learning_style": "Auditory",
+    "level": "Advanced",
+    "interests": "python",
+    "history": [
+      {
+        "topic": "python"
+      }
+    ]
+  },
+  "0982": {
+    "accuracy": 80,
+    "learning_style": "Auditory",
+    "level": "Advanced",
+    "interests": "ml",
+    "history": [
+      {
+        "topic": "ml"
+      }
+    ]
+  },
+  "9842": {
+    "accuracy": 80,
+    "learning_style": "Reading-Writing",
+    "level": "Intermediate",
+    "interests": "python",
+    "user_id": "9842",
+    "history": [
+      {
+        "topic": "python"
+      }
+    ]
+  },
+  "testuser123": {
+    "learning_style": "Visual",
+    "level": "Beginner",
+    "accuracy": 85,
+    "user_id": "testuser123",
+    "history": [
+      {
+        "topic": "Python Programming"
+      }
+    ]
+  },
+  "328q2": {
+    "accuracy": 80,
+    "learning_style": "Reading-Writing",
+    "level": "Intermediate",
+    "interests": "ai",
+    "user_id": "328q2",
+    "history": [
+      {
+        "topic": "ai"
+      },
+      {
+        "topic": "ai"
+      }
+    ]
+  },
+  "anusha": {
+    "accuracy": 80,
+    "learning_style": "reading",
+    "level": "advanced",
+    "interests": "java",
+    "user_id": "anusha",
+    "history": [
+      {
+        "topic": "python",
+        "timestamp": "2026-03-01T20:41:42.477030"
+      },
+      {
+        "topic": "devops",
+        "timestamp": "2026-03-01T20:48:33.992512"
+      },
+      {
+        "topic": "c++",
+        "timestamp": "2026-03-01T21:04:38.799320"
+      },
+      {
+        "topic": "c language",
+        "timestamp": "2026-03-01T21:14:26.741607"
+      },
+      {
+        "topic": "java",
+        "timestamp": "2026-03-01T21:27:17.796607"
+      }
+    ]
+  },
+  "pravallika": {
+    "accuracy": 100,
+    "learning_style": "reading",
+    "level": "beginner",
+    "interests": "javascript",
+    "user_id": "pravallika",
+    "history": [
+      {
+        "topic": "java script",
+        "timestamp": "2026-03-02T20:40:39.649090"
+      }
+    ]
+  },
+  "pujitha": {
+    "accuracy": 80,
+    "learning_style": "reading",
+    "level": "advanced",
+    "interests": "python",
+    "user_id": "pujitha",
+    "history": [
+      {
+        "topic": "flask",
+        "timestamp": "2026-03-05T20:19:23.550189"
+      },
+      {
+        "topic": "python",
+        "timestamp": "2026-03-05T20:21:32.791975"
+      }
+    ]
+  },
+  "hyma": {
+    "accuracy": 80,
+    "learning_style": "reading",
+    "level": "advanced",
+    "interests": "ml",
+    "user_id": "hyma",
+    "history": [
+      {
+        "topic": "java",
+        "time": "2026-03-05T20:54:45.203684"
+      },
+      {
+        "topic": "java",
+        "time": "2026-03-05T20:55:02.926529"
+      },
+      {
+        "topic": "ml",
+        "time": "2026-03-05T20:55:49.354918"
+      },
+      {
+        "topic": "ml",
+        "time": "2026-03-05T20:56:20.602569"
+      }
+    ]
+  },
+  "harika": {
+    "accuracy": 95,
+    "learning_style": "visual",
+    "level": "beginner",
+    "interests": "ai",
+    "user_id": "harika",
+    "history": [
+      {
+        "topic": "ai",
+        "time": "2026-03-06T14:27:13.722524"
+      }
+    ]
+  },
+  "U121": {
+    "accuracy": 80,
+    "learning_style": "visual",
+    "level": "advanced",
+    "interests": "",
+    "user_id": "U121",
+    "history": [
+      {
+        "topic": "ai",
+        "time": "2026-03-06T14:59:49.249145"
+      }
+    ]
+  }
+}

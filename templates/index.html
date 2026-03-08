@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personalized Learning Assistant - Generate customized learning materials">
+    <title>🧠 Personalized Learning Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Personalized Learning Assistant</h1>
+            {% if user %}
+            <div class="user-info">
+                <span>👤 {{ user }}</span>
+                <a href="/logout" class="btn btn-small">Logout</a>
+            </div>
+            {% else %}
+            <div class="auth-links">
+                <a href="/login" class="btn">Login</a>
+                <a href="/signup" class="btn btn-primary">Sign Up</a>
+            </div>
+            {% endif %}
+        </header>
+
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <section class="learning-form">
+                <h2>📚 Generate Learning Material</h2>
+                <p class="subtitle">Enter a topic and get personalized learning content tailored to your style!</p>
+                
+                <form id="learnForm">
+                    <div class="form-group">
+                        <label for="topic">📘 Topic *</label>
+                        <input 
+                            type="text" 
+                            id="topic" 
+                            name="topic" 
+                            placeholder="e.g., Python Programming, Machine Learning, Web Development"
+                            required
+                            autocomplete="off">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="level">📈 Level</label>
+                            <select id="level" name="level">
+                                <option value="Beginner" {% if profile and profile.level == 'Beginner' %}selected{% endif %}>Beginner</option>
+                                <option value="Intermediate" {% if profile and profile.level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                                <option value="Advanced" {% if profile and profile.level == 'Advanced' %}selected{% endif %}>Advanced</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="learning_style">🎓 Learning Style</label>
+                            <select id="learning_style" name="learning_style">
+                                <option value="Reading" {% if profile and profile.learning_style == 'Reading' %}selected{% endif %}>Reading</option>
+                                <option value="Visual" {% if profile and profile.learning_style == 'Visual' %}selected{% endif %}>Visual</option>
+                                <option value="Auditory" {% if profile and profile.learning_style == 'Auditory' %}selected{% endif %}>Auditory</option>
+                                <option value="Hands-on" {% if profile and profile.learning_style == 'Hands-on' %}selected{% endif %}>Hands-on</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="accuracy">⚡ Accuracy %</label>
+                            <input 
+                                type="number" 
+                                id="accuracy" 
+                                name="accuracy" 
+                                min="0" 
+                                max="100" 
+                                value="{{ profile.accuracy if profile else 80 }}"
+                                placeholder="0-100">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interests">⭐ Interests</label>
+                            <input 
+                                type="text" 
+                                id="interests" 
+                                name="interests" 
+                                value="{{ profile.interests if profile else '' }}"
+                                placeholder="e.g., AI, Web, Data Science">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large" id="generateBtn">
+                        🚀 Generate Learning Material
+                    </button>
+                </form>
+            </section>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating your personalized content...</p>
+            </div>
+
+            <section id="output" class="output" style="display: none;">
+                <h2>📖 Your Learning Material</h2>
+                <div id="content"></div>
+                <button class="btn btn-small" onclick="clearContent()">🗑️ Clear</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>📚 Personalized Learning Assistant v2.0</p>
+            {% if user %}
+            <p><a href="/profile">⚙️ Profile Settings</a> | <a href="/history">📜 History</a></p>
+            {% endif %}
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
