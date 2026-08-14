@@ -465,3 +465,7 @@ For issues and questions:
 **Version**: 2.0 (Enhanced & Production-Ready)  
 **Last Updated**: February 27, 2026  
 **Status**: ✅ All bugs fixed, ready for production
+
+
+
+Deploy link:[https://personalized-learning-app-seven.vercel.app/]
