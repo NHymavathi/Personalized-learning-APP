@@ -28,7 +28,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Database configuration
-DATABASE = 'users.db'
+DATABASE = '/tmp/users.db'
 
 # ============================================================================
 # DATABASE FUNCTIONS
